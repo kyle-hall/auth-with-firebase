@@ -1,12 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <div v-if="showNav" id="nav">
+      <router-link to="/">Dashboard</router-link> |
+      <router-link to="/about">Settings</router-link>
     </div>
-    <router-view/>
+    <router-view />
   </div>
 </template>
+
+<script>
+import { mapState } from 'vuex'
+
+export default {
+  computed: {
+    ...mapState(['userProfile']),
+    showNav() {
+      return Object.keys(this.userProfile).length > 1
+    },
+  },
+}
+</script>
 
 <style lang="scss">
 #app {
